@@ -16,7 +16,7 @@
   LEAF1-4 AS65001-65004; SPINE1-2 AS65010.  
 4. Конфигурируем LEAF коммутаторы.
 
-#### LEAF1
+LEAF1:  
 feature bgp  
 feature bfd  
 route-map RM_REDIS_CON pe  rmit 10  
@@ -44,7 +44,7 @@ router bgp 65001
   
 5. Конфигурируем SPINE коммутаторы.  
 
-#### SPINE1  
+SPINE1:  
 route-map RM_Leaves_BGP permit 10  
   match as-number 65001, 65002, 65003, 65004  
       
