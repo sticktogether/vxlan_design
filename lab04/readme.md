@@ -17,46 +17,46 @@
 4. Конфигурируем LEAF коммутаторы.
 
 #### LEAF1
-feature bgp
-feature bfd
-route-map RM_REDIS_CON permit 10
-  match ip address 10.0.0.1
-route-map RM_REDIS_CON permit 20
-  match ip address 10.1.0.1
-route-map RM_REDIS_CON deny 30
-
-router bgp 65001
-  router-id 10.0.0.1
-  reconnect-interval 12
-  log-neighbor-changes
-  address-family ipv4 unicast
-    redistribute direct route-map RM_REDIS_CON
-    maximum-paths 10
-  template peer SPINES
-    bfd
-    remote-as 65010
-    timers 3 9
-    address-family ipv4 unicast
-  neighbor 10.2.1.0
-    inherit peer SPINES
-  neighbor 10.2.2.0
-    inherit peer SPINES
-
-5. Конфигурируем SPINE коммутаторы.
-
-#### SPINE1
-route-map RM_Leaves_BGP permit 10
-  match as-number 65001, 65002, 65003, 65004
+feature bgp  
+feature bfd  
+route-map RM_REDIS_CON pe  rmit 10  
+  match ip address 10.0.0.1  
+route-map RM_REDIS_CON permit 20  
+  match ip address 10.1.0.1  
+route-map RM_REDIS_CON deny 30  
   
-router bgp 65010
-  router-id 10.0.1.0
-  reconnect-interval 12
-  log-neighbor-changes
-  address-family ipv4 unicast
-    maximum-paths 10
-  neighbor 10.0.0.0/8 remote-as route-map RM_Leaves_BGP
-    bfd
-    address-family ipv4 unicast
+router bgp 65001  
+  router-id 10.0.0.1  
+  reconnect-interval 12  
+  log-neighbor-changes  
+  address-family ipv4 unicast  
+    redistribute direct route-map RM_REDIS_CON  
+    maximum-paths 10  
+  template peer SPINES  
+    bfd  
+    remote-as 65010  
+    timers 3 9  
+    address-family ipv4 unicast  
+  neighbor 10.2.1.0  
+    inherit peer SPINES  
+  neighbor 10.2.2.0  
+    inherit peer SPINES  
+  
+5. Конфигурируем SPINE коммутаторы.  
+
+#### SPINE1  
+route-map RM_Leaves_BGP permit 10  
+  match as-number 65001, 65002, 65003, 65004  
+      
+router bgp 65010  
+  router-id 10.0.1.0  
+  reconnect-interval 12  
+  log-neighbor-changes  
+  address-family ipv4 unicast  
+    maximum-paths 10  
+  neighbor 10.0.0.0/8 remote-as route-map RM_Leaves_BGP  
+    bfd  
+    address-family ipv4 unicast  
 
 
 #### Таблица соседства на SPINE2
