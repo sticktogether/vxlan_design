@@ -1,6 +1,6 @@
 !Command: show running-config
-!Running configuration last done at: Tue Jan 21 14:03:42 2025
-!Time: Tue Jan 21 15:03:49 2025
+!Running configuration last done at: Tue Jan 21 22:44:52 2025
+!Time: Tue Jan 21 23:21:51 2025
 
 version 9.3(9) Bios:version
 hostname LEAF2
@@ -34,6 +34,8 @@ rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
 rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
 rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
 
+ip route 10.0.1.0/32 10.2.1.2
+ip route 10.0.2.0/32 10.2.2.2
 vlan 1,10
 vlan 10
   name CUSTOMER-1
@@ -216,13 +218,14 @@ router bgp 65002
   template peer SPINES
     bfd
     remote-as 65010
+    update-source loopback1
+    ebgp-multihop 5
     timers 3 9
     address-family ipv4 unicast
     address-family l2vpn evpn
       send-community
       send-community extended
-  neighbor 10.2.1.2
+  neighbor 10.0.1.0
     inherit peer SPINES
-  neighbor 10.2.2.2
+  neighbor 10.0.2.0
     inherit peer SPINES
-
