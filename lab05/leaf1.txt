@@ -1,6 +1,6 @@
 !Command: show running-config
-!Running configuration last done at: Tue Jan 21 14:05:28 2025
-!Time: Tue Jan 21 15:06:04 2025
+!Running configuration last done at: Tue Jan 21 22:45:56 2025
+!Time: Tue Jan 21 23:23:15 2025
 
 version 9.3(9) Bios:version
 hostname LEAF1
@@ -22,18 +22,22 @@ feature bfd
 feature nv overlay
 
 no password strength-check
-username admin password 5 $5$FPKLFD$uGcSdPW/.Dh7qgyQ/HJc9czETtHAU92UxtVsbZp398/  role network-admin
+username admin password 5 $5$FPKLFD$uGcSdPW/.Dh7qgyQ/HJc9czETtHAU92UxtVsbZp398/
+ role network-admin
 ip domain-lookup
 copp profile strict
 bfd echo-interface loopback0
 bfd startup-timer 20
-snmp-server user admin network-admin auth md5 174DD18891A1967A0EF85CDE28C773BB44BA priv 331CD0A6F89EFC1F238812886BC828B44AE7 localizedV2key
+snmp-server user admin network-admin auth md5 174DD18891A1967A0EF85CDE28C773BB44
+BA priv 331CD0A6F89EFC1F238812886BC828B44AE7 localizedV2key
 rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
 rmon event 2 log trap public description CRITICAL(2) owner PMON@CRITICAL
 rmon event 3 log trap public description ERROR(3) owner PMON@ERROR
 rmon event 4 log trap public description WARNING(4) owner PMON@WARNING
 rmon event 5 log trap public description INFORMATION(5) owner PMON@INFO
 
+ip route 10.0.1.0/32 10.2.1.0
+ip route 10.0.2.0/32 10.2.2.0
 vlan 1,10
 vlan 10
   name CUSTOMER-1
@@ -217,12 +221,14 @@ router bgp 65001
   template peer SPINES
     bfd
     remote-as 65010
+    update-source loopback1
+    ebgp-multihop 5
     timers 3 9
     address-family ipv4 unicast
     address-family l2vpn evpn
       send-community
       send-community extended
-  neighbor 10.2.1.0
+  neighbor 10.0.1.0
     inherit peer SPINES
-  neighbor 10.2.2.0
+  neighbor 10.0.2.0
     inherit peer SPINES
