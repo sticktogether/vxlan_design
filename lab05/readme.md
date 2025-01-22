@@ -1,5 +1,9 @@
 ## Выводы для траблшутинга
 
+
+### rewrite-rt-asn не хочет применяется к динамической настройке bgp соседей
+![image](https://github.com/user-attachments/assets/f4fc50a3-fcfc-4599-8916-9f32e4f8667d)
+
 ### Leaf1 mac table
 ![image](https://github.com/user-attachments/assets/f12a7f99-741a-4a55-84c3-68a9438551a1)
 
