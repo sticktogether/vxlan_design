@@ -16,7 +16,7 @@
 ![image](https://github.com/user-attachments/assets/f4fc50a3-fcfc-4599-8916-9f32e4f8667d)
 
 Переконфигурируем соседей статически:
-template peer LEAF  
+> template peer LEAF  
     bfd  
     update-source loopback1  
     ebgp-multihop 5  
