@@ -1,6 +1,6 @@
 !Command: show running-config
-!Running configuration last done at: Tue Jan 21 23:05:32 2025
-!Time: Tue Jan 21 23:22:15 2025
+!Running configuration last done at: Wed Jan 22 13:17:54 2025
+!Time: Wed Jan 22 14:18:12 2025
 
 version 9.3(9) Bios:version
 hostname SPINE2
@@ -215,7 +215,7 @@ router bgp 65010
     maximum-paths 10
   address-family l2vpn evpn
     retain route-target all
-  neighbor 10.0.0.0/8 remote-as route-map RM_Leaves_BGP
+  template peer LEAF
     bfd
     update-source loopback1
     ebgp-multihop 5
@@ -224,3 +224,10 @@ router bgp 65010
       send-community
       send-community extended
       route-map NEXT-HOP-UNCH out
+      rewrite-evpn-rt-asn
+  neighbor 10.0.0.1
+    inherit peer LEAF
+    remote-as 65001
+  neighbor 10.0.0.2
+    inherit peer LEAF
+    remote-as 65002
