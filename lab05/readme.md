@@ -57,7 +57,7 @@ rewrite-evpn-rt-asn работает на входящие апдейты и Lea
       send-community extended  
       route-map NEXT-HOP-UNCH out  
 
-### rewrite-rt-asn не хочет применяется к динамической настройке bgp соседей
+### rewrite-rt-asn не хочет применяться к динамической настройке bgp соседей
 ![image](https://github.com/user-attachments/assets/f4fc50a3-fcfc-4599-8916-9f32e4f8667d)
 
 ### Переконфигурируем соседей статически:
