@@ -34,8 +34,8 @@ feature nv overlay
 5. На спайнах создаем роут-мапу, которая оставляет поле next-hop в bgp update неизменным (чтобы мы видели своего nve соседа).
 6. Поскольку фабрика строится на лифах в разных AS и RT гегениируется автоматически, даже в одинаковых mac-vrf RT для разных устройств будет разным. 
 > Пример:  
-LEAF1 AS 65001, VNI 10010: RT65001:10010  
-LEAF2 AS 65002, VNI 10010: RT65002:10010.  
+LEAF1 AS 65001, VNI 10010: RT - 65001:10010.  
+LEAF2 AS 65002, VNI 10010: RT - 65002:10010.  
   
 Несмотря на одинаковые VNI, лифы не смогут импортировать маршруты в свою таблицу, тк RT не совпадут. Необходимо поменять номер AS, чтобы локальный RT совпал с тем, который анонсирует SPINE.  
 Команда: rewrite-evpn-rt-asn. Настраивается у соседа в l2 evpn AF.  
@@ -78,31 +78,26 @@ rewrite-evpn-rt-asn работает на входящие апдейты и Lea
     inherit peer LEAF  
     remote-as 65002  
 
+7. Пингуем устройства в одном влане за разными лифами. Пинг прошел. Успех!
 
 ### Leaf1 mac table
-
-
-### Leaf1 bgp summary
-
-
-### Leaf1 evpn summary
-
-
-### Leaf1 evpn routes
-
+![image](https://github.com/user-attachments/assets/183aa3a5-2590-415b-afbe-53da20a433a8)
 
 ### Leaf1 nve peers
 ![image](https://github.com/user-attachments/assets/5d0b78dc-31d8-4203-b454-60cefec94a15)
 
+### Leaf1 bgp summary
+![image](https://github.com/user-attachments/assets/da7e741b-bce2-4620-afdb-c138ff4a83c9)
 
-### Spine1 bgp summary
+### Leaf1 evpn summary
+![image](https://github.com/user-attachments/assets/29b6c4c1-4a5e-49cd-a024-028aa00f38c3)
 
+### Leaf1 evpn routes
+![image](https://github.com/user-attachments/assets/67157e77-441d-406d-a328-4536e09a7af4)
 
-### Spine1 evpn summary
+### Leaf2 evpn routes
+![image](https://github.com/user-attachments/assets/21f83850-1c73-4836-bca0-f74e3a91767b)
 
-
-### Spine1 evpn routes
-
-
-### Spine1 adv routes to Leaf1
+### Ping Customer-1 -> Customer-2
+![image](https://github.com/user-attachments/assets/a6481092-29bb-4468-b301-d3b85b6c050e)
 
