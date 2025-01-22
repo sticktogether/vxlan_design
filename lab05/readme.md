@@ -32,7 +32,7 @@ feature nv overlay
 4. При настройке bgp пиров указываем update-source адрес, с которого будет строится соседство по bgp, настраиваем ebgp-multihop для увеличения TTL, включаем ext community.
 
 5. На спайнах создаем роут-мапу, которая оставляет поле next-hop в bgp update неизменным (чтобы мы видели своего nve соседа).
-6. Поскольку фабрика строится на лифах в разных AS и RT гегениируется автоматически, даже в одинаковых mac-vrf RT для разных устройств будет разным. 
+6. Поскольку фабрика строится на лифах в разных AS и RT генерируются автоматически, даже в одинаковых mac-vrf RT для разных лифов будут разными. 
 > Пример:  
 LEAF1 AS 65001, VNI 10010: RT - 65001:10010.  
 LEAF2 AS 65002, VNI 10010: RT - 65002:10010.  
@@ -43,7 +43,7 @@ LEAF2 AS 65002, VNI 10010: RT - 65002:10010.
 > Из гайдлайна циски: 
 This command requires that it be configured on all BGP speakers in the fabric.
 
-Они разбираюот пример с передачей RT _Leaf2 -> Spine1 -> Leaf1_, указывая, что Spine1 также меняет AS в RT на локальную. **Зачем?**  
+[Они разбирают пример с передачей RT _Leaf2 -> Spine1 -> Leaf1_](https://www.cisco.com/c/en/us/td/docs/switches/datacenter/nexus9000/sw/93x/vxlan/configuration/guide/b-cisco-nexus-9000-series-nx-os-vxlan-configuration-guide-93x/m_configuring_the_underlay.html), указывая, что Spine1 также меняет AS в RT на локальную. **Зачем?**  
 rewrite-evpn-rt-asn работает на входящие апдейты и Leaf1 поменял бы любое значение AS в RT на свое даже без участия Spine. Это должно работать и без команды на спайне (но не работает - проверено ;D ). **Для чего Spine1 это делает и почему без него это не работает?**  
 
 ### Конфигурация соседей на спайнах:
