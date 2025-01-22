@@ -1,7 +1,7 @@
-## Выводы для траблшутинга
+## VxLAN. L2 VNI
 
 
-Конфигурация соседений на спайнах:
+###Конфигурация соседений на спайнах:
 > neighbor 10.0.0.0/8 remote-as route-map RM_Leaves_BGP  
     bfd  
     update-source loopback1  
@@ -15,7 +15,7 @@
 ### rewrite-rt-asn не хочет применяется к динамической настройке bgp соседей
 ![image](https://github.com/user-attachments/assets/f4fc50a3-fcfc-4599-8916-9f32e4f8667d)
 
-Переконфигурируем соседей статически:
+###Переконфигурируем соседей статически:
 > template peer LEAF  
     bfd  
     update-source loopback1  
