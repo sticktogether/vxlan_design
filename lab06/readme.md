@@ -41,13 +41,13 @@ feature vn-segment-vlan-based
   ip address 192.168.10.10/24  
   fabric forwarding mode anycast-gateway  
   
-interface Vlan20  
+> interface Vlan20  
   no shutdown  
   vrf member CUSTOMER-1  
   ip address 192.168.20.20/24  
   fabric forwarding mode anycast-gateway  
   
-interface Vlan100  
+> interface Vlan100  
   mtu 9000  
   vrf member CUSTOMER-1  
   ip forward  
