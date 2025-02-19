@@ -51,8 +51,8 @@ member vni 10030
   spanning-tree port type network  
   vpc peer-link  
 
-4. Настраиваем Po 1/2 в сторону конечных хостов.
->interface port-channel1  
+4. Настраиваем даунлинки Po 1/2 в сторону конечных хостов.
+> interface port-channel1  
   switchport  
   switchport mode trunk  
   vpc 1  
