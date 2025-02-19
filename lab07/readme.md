@@ -49,7 +49,11 @@ member vni 10030
   switchport  
   switchport mode trunk  
   spanning-tree port type network  
-  vpc peer-link  
+  vpc peer-link
+
+> interface loopback1  
+  ip address 10.0.0.4/32  
+**  ip address 10.0.0.5/32 secondary**
 
 4. Настраиваем даунлинки Po 1/2 в сторону конечных хостов.
 > interface port-channel1  
