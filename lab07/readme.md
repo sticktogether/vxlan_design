@@ -30,7 +30,7 @@ feature vpc
 member vni 10030  
     ingress-replication protocol bgp  
   member vni 100100 associate-vrf
-3. Создаем vrf для peer-keepalive линка. Настраиваем keepalive и peer-link.
+3. Создаем vrf для peer-keepalive линка. Настраиваем vpc домен, keepalive и peer-link.
 > vrf context keepalive
   
 > interface Ethernet1/7  
