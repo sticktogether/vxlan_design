@@ -97,7 +97,7 @@ member vni 10030
 ### Leaf4 vpc consistency-parameters
 ![image](https://github.com/user-attachments/assets/791c7766-dc19-4172-a280-a42ceaa2fd76)
 
-### Ping Customer-10-2 -> Customer-10-1/ Customer-10-3/ Customer-20-1/ Customer-20-2/ Customer-30-1/
+### Ping Customer-10-2 -> Customer-10-1/ Customer-10-3/ Customer-20-1/ Customer-30-1/
 ![image](https://github.com/user-attachments/assets/c61c5229-0341-4b5a-9424-f598801a9df0)
 
 ### Ping Customer-30-1 -> Customer-10-1/ Customer-20-1
