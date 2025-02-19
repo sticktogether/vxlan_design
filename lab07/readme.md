@@ -10,35 +10,59 @@
 
 1. Включаем фичи для поддержки vPC.
 
-> feature interface-vlan  
-feature vn-segment-vlan-based  
+> feature lacp  
+feature vpc  
 
+2. Подключаем 2 сервера к Leaf3/4 (один из них в новом VNI 10030, который будет создан только на VPC паре).
+>vlan 30  
+  name CUSTOMER-3  
+  vn-segment 10030  
 
+> interface Vlan30  
+  no shutdown  
+  vrf member CUSTOMER-1  
+  no ip redirects  
+  ip address 192.168.30.30/24  
+  no ipv6 redirects  
+  fabric forwarding mode anycast-gateway  
+  
+>interface nve1  
+member vni 10030  
+    ingress-replication protocol bgp  
+  member vni 100100 associate-vrf
+3. Создаем vrf для peer-keepalive линка. Настраиваем keepalive и peer-link.
+> vrf context keepalive
+  
+> interface Ethernet1/7  
+  vrf member keepalive  
+  ip address 192.168.1.1/24  
+  no shutdown  
 
+> vpc domain 100  
+  peer-switch  
+  system-priority 1  
+  peer-keepalive destination 192.168.1.2 source 192.168.1.1 vrf keepalive  
+  peer-gateway  
+  ip arp synchronize  
 
+> interface port-channel100  
+  switchport  
+  switchport mode trunk  
+  spanning-tree port type network  
+  vpc peer-link  
 
+4. Настраиваем Po 1/2 в сторону конечных хостов.
+>interface port-channel1  
+  switchport  
+  switchport mode trunk  
+  vpc 1  
+  
+> interface port-channel2  
+  switchport  
+  switchport mode trunk  
+  vpc 2  
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+5. Собираем портченелы на хостах. Проверяем состояние vpc. Смотрим evpn роуты. Произвольно пингуем хосты друг с другом.
 
 
 ### Leaf1 nve peers
