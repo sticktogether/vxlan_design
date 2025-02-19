@@ -1,7 +1,6 @@
-
 !Command: show running-config
-!Running configuration last done at: Wed Feb 19 00:05:36 2025
-!Time: Wed Feb 19 00:09:17 2025
+!Running configuration last done at: Wed Feb 19 01:26:29 2025
+!Time: Wed Feb 19 02:11:28 2025
 
 version 9.3(8) Bios:version
 hostname LEAF4
@@ -27,8 +26,7 @@ feature bfd
 feature nv overlay
 
 no password strength-check
-username admin password 5 $5$FPKLFD$uGcSdPW/.Dh7qgyQ/HJc9czETtHAU92UxtVsbZp398/
- role network-admin
+username admin password 5 $5$FPKLFD$uGcSdPW/.Dh7qgyQ/HJc9czETtHAU92UxtVsbZp398/  role network-admin
 ip domain-lookup
 copp profile strict
 rmon event 1 log trap public description FATAL(1) owner PMON@FATAL
@@ -68,8 +66,11 @@ vrf context CUSTOMER-1
 vrf context keepalive
 vrf context management
 vpc domain 100
-  system-priority 100
+  peer-switch
+  system-priority 1
   peer-keepalive destination 192.168.1.1 source 192.168.1.2 vrf keepalive
+  peer-gateway
+  ip arp synchronize
 
 
 interface Vlan1
@@ -79,26 +80,34 @@ interface Vlan1
 interface Vlan10
   no shutdown
   vrf member CUSTOMER-1
+  no ip redirects
   ip address 192.168.10.10/24
+  no ipv6 redirects
   fabric forwarding mode anycast-gateway
 
 interface Vlan20
   no shutdown
   vrf member CUSTOMER-1
+  no ip redirects
   ip address 192.168.20.20/24
+  no ipv6 redirects
   fabric forwarding mode anycast-gateway
 
 interface Vlan30
   no shutdown
   vrf member CUSTOMER-1
+  no ip redirects
   ip address 192.168.30.30/24
+  no ipv6 redirects
   fabric forwarding mode anycast-gateway
 
 interface Vlan100
   no shutdown
   mtu 9000
   vrf member CUSTOMER-1
+  no ip redirects
   ip forward
+  no ipv6 redirects
 
 interface port-channel1
   switchport
