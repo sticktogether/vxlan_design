@@ -5,5 +5,5 @@
  - [Lab04. Построение Underlay сети(eBGP)](lab04/)
  - [Lab05. VxLAN. L2 VNI](lab05/)
  - [Lab06. VxLAN. L3 VNI](/lab06)
- - [Lab07. In progress](/)
+ - [Lab07. VxLAN. VPC](/lab07)
  - [Lab08. In progress](/)
