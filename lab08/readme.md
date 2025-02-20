@@ -1,4 +1,4 @@
-# VxLAN. Routing.
+# VxLAN. Routing
 
 ### Задачи:
 Реализовать маршрутизацию между "клиентами" через EVPN route-type 5
