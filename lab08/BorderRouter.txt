@@ -1,0 +1,138 @@
+Current configuration : 3655 bytes
+!
+! Last configuration change at 23:48:40 UTC Wed Feb 19 2025
+!
+version 15.5
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname BorderRouter
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+ethernet lmi ce
+!
+!
+!
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+!
+redundancy
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 10.10.10.10 255.255.255.255
+!
+interface Loopback1
+ ip address 8.8.8.8 255.255.255.255
+!
+interface GigabitEthernet0/0
+ no ip address
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/0.101
+ encapsulation dot1Q 101
+ ip address 10.100.101.2 255.255.255.252
+!
+interface GigabitEthernet0/0.201
+ encapsulation dot1Q 201
+ ip address 10.200.201.2 255.255.255.252
+!
+interface GigabitEthernet0/1
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/2
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+ media-type rj45
+!
+interface GigabitEthernet0/3
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+ media-type rj45
+!
+router bgp 65100
+ bgp router-id 10.10.10.10
+ bgp log-neighbor-changes
+ neighbor 10.100.101.1 remote-as 65001
+ neighbor 10.200.201.1 remote-as 65001
+ !
+ address-family ipv4
+  redistribute connected route-map REDIS_INET
+  neighbor 10.100.101.1 activate
+  neighbor 10.100.101.1 as-override
+  neighbor 10.200.201.1 activate
+  neighbor 10.200.201.1 as-override
+ exit-address-family
+!
+ip forward-protocol nd
+!
+!
+no ip http server
+no ip http secure-server
+!
+!
+route-map REDIS_INET permit 10
+!
+!
+!
+control-plane
+!
+line con 0
+line aux 0
+line vty 0 4
+ login
+ transport input none
+!
+no scheduler allocate
+!
+end
