@@ -6,4 +6,4 @@
  - [Lab05. VxLAN. L2 VNI](lab05/)
  - [Lab06. VxLAN. L3 VNI](/lab06)
  - [Lab07. VxLAN. VPC](/lab07)
- - [Lab08. In progress](/)
+ - [Lab08. VxLAN. Routing](/lab08)
