@@ -59,7 +59,7 @@ vrf CUSTOMER-1
         send-community  
         send-community extended  
 
-3. Конфигурируем Border Router, дополнительно анонсируем в vrf Customer-1 лупбек 8.8.8.8 .
+3. Конфигурируем Border Router, дополнительно анонсируем лупбек 8.8.8.8 (типа интернет, все дела).
 > interface Loopback0  
  ip address 10.10.10.10 255.255.255.255  
 !  
